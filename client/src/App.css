@@ -5,6 +5,21 @@
   text-align: center;
 }
 
+.navbar {
+  background-color: whitesmoke;
+  margin-bottom: 10em;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar ul {
+  list-style: none;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .display-products{
   display: grid;
   grid-template-columns: 33% 33% 33%;
@@ -13,6 +28,10 @@
 
 .home-pics{
   width: 50%;
+}
+
+.single-product-image{
+  width: 40%;
 }
 
 
