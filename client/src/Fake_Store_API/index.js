@@ -65,12 +65,13 @@ export async function fetchAllUsers() {
         const response = await fetch('https://fakestoreapi.com/users');
         const result = await response.json();
         console.log(result);
+        return result;
     } catch(err) {
         console.error('Trouble fetching users', err);
     }
 }
 
-export async function fetchUser(id) {
+export async function fetchUser(token, id) {
     try {
         const response = await fetch(`https://fakestoreapi.com/users/${id}`, {
             headers: {
