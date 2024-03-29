@@ -34,6 +34,9 @@
   width: 40%;
 }
 
+.add-to-cart-single-item-view {
+  margin: 10px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {

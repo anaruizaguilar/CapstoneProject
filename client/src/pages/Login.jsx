@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../Fake_Store_API";
-import { fetchAllUsers } from "../Fake_Store_API";
+import { fetchAllUsers, fetchUserCart } from "../Fake_Store_API";
 
-function Login({ setToken }) {
+function Login({ setToken, setUser, setCart }) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -17,10 +17,13 @@ function Login({ setToken }) {
         if(data) {
             localStorage.setItem('token', data.token);
             setToken(data.token);
-            const allUsers = await fetchAllUsers();
-            const id = allUsers.find((customer) => username === customer.username)
-            console.log(id);
-            navigate(`/account/${id.id}`);
+            const user = await fetchAllUsers(username);
+            setUser(user);
+            const userCart = await fetchUserCart(user.id);
+            console.log(userCart);
+            // console.log(user.id);
+            setCart(userCart);
+            navigate(`/account/${user.id}`);
         }
     }
 

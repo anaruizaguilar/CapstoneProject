@@ -27,6 +27,7 @@ function SingleProduct() {
             <img src={product.image} className="single-product-image" />
             <p>{product.description}</p>
             <p>{product.price}</p>
+            <button className="add-to-cart-single-item-view">Add To Cart</button>
             <button className="SP-return-button" onClick={() => navigate('/')}>Continue Shopping</button>
         </div>
     )

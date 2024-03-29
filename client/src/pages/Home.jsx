@@ -2,21 +2,21 @@ import { fetchProducts } from "../Fake_Store_API";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Home({products}) {
 
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        async function getProducts() {
-            try{
-            const allProducts = await fetchProducts();
-            setProducts(allProducts);
-            } catch(err) {
-                console.error(error);
-            }
-        }
-        getProducts();
-    }, [])
+    // useEffect(() => {
+    //     async function getProducts() {
+    //         try{
+    //         const allProducts = await fetchProducts();
+    //         setProducts(allProducts);
+    //         } catch(err) {
+    //             console.error(error);
+    //         }
+    //     }
+    //     getProducts();
+    // }, [])
 
     return(
         <div className="display-products">
@@ -28,6 +28,7 @@ function Home() {
                             <img src={product.image} className="home-pics"/>
                             <p>{product.category}</p>
                             <p>{product.price}</p>
+                            <button className="add-to-cart-homepage">Add To Cart</button>
                         </div>
                     )
                 })

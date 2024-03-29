@@ -8,7 +8,7 @@ function Navbar() {
                 <li><Link to={"/register"}>Register</Link></li>
                 <li><Link to={"/login"}>Login</Link></li>
                 <li><Link to={"/account/:id"}>Account</Link></li>
-                <li>Cart</li>
+                <li><Link to={"/cart"}>Cart</Link></li>
             </ul>
         </div>
     )

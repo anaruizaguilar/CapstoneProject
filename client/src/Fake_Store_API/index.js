@@ -3,6 +3,7 @@ import SingleProduct from "../pages/SingleProduct";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Account from "../pages/Account";
+import Cart from "../components/Cart";
 
 export async function fetchProducts() {
     try {
@@ -60,12 +61,13 @@ export async function login(username, password) {
     }
 }
 
-export async function fetchAllUsers() {
+export async function fetchAllUsers(username) {
     try {
         const response = await fetch('https://fakestoreapi.com/users');
         const result = await response.json();
-        console.log(result);
-        return result;
+        const userData = result.find((user) => user.username === username);
+        console.log(userData);
+        return userData;
     } catch(err) {
         console.error('Trouble fetching users', err);
     }
@@ -80,11 +82,22 @@ export async function fetchUser(token, id) {
             },
         })
         const result = await response.json();
-        console.log(result)
+        //console.log(result)
         return result;
     } catch(err) {
         console.error('Trouble fetching user', err);
     }
 }
 
-export { Home, SingleProduct, Register, Login, Account };
+export async function fetchUserCart(id) {
+    try {
+        const response = await fetch(`https://fakestoreapi.com/carts/${id}`);
+        const result = await response.json();
+        console.log(result.products);
+        return result.products;
+    } catch(err) {
+        console.error('Trouble fetching user cart', err);
+    }
+}
+
+export { Home, SingleProduct, Register, Login, Account, Cart };
