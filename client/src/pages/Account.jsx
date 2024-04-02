@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchUser } from "../Fake_Store_API";
 
 
+
 function Account({ token }) {
 
     const [user, setUser] = useState([]);

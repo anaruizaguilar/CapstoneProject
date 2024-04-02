@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import Account from './pages/Account';
 
 
+
+
 function App() {
   
 const [token, setToken] = useState(localStorage.getItem('token'));
@@ -31,7 +33,7 @@ useEffect(() => {
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login token={token} setToken={setToken} setUser={setUser} setCart={setCart}/>}></Route>
         <Route path='/account/:id' element={<Account token={token} user={user} cart={cart}/>}></Route>
-        <Route path='/cart' element={<Cart />} cart={cart} products={products} setCart={setCart}></Route>
+        <Route path='/cart' element={<Cart cart={cart} products={products} setCart={setCart} user={user}/>}></Route>
       </Routes>
     </div>
   </>
