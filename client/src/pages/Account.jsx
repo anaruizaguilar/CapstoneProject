@@ -1,39 +1,30 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchUser } from "../Fake_Store_API";
 
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+function Account({ token, user, cart }) {
 
-function Account({ token }) {
-
-    const [user, setUser] = useState([]);
-    const { id } = useParams();
+    console.log(user);
+    console.log(cart);
+    console.log(token);
     const navigate = useNavigate();
 
     useEffect(() => {
         if(!token) {
             return navigate('/login');
         }
+    }, [token])
 
-        async function userAccount() {
-            try {
-                const response = await fetchUser(token, id);
-                //console.log(response);
-                setUser(response);
-            } catch(error) {
-                console.error(error);
-            }
-        }
-        userAccount(id);
-    }, [id])
 
     const logOut = (() => {
         localStorage.removeItem('token', token);
+        localStorage.removeItem('user');
+        localStorage.removeItem('cart');
         return navigate('/login');
     })
 
     return(
-        <div key={id}>
+        <div key={user.id}>
             <h2>Hello {user.username}</h2>
             <button onClick={logOut}>Log Out</button>
         </div>

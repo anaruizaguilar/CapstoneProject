@@ -38,6 +38,28 @@
   margin: 10px;
 }
 
+.cart-item-img {
+  width: 30%;
+  margin-right: 500px;
+}
+
+.cart-item-card {
+  display: inline-block;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  width: 600px;
+  margin: 10px;
+  padding: 40px;
+}
+
+.cart-item-details {
+  text-align: right;
+}
+h3 {
+  text-align: right;
+  font-size: medium;
+  
+}
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;

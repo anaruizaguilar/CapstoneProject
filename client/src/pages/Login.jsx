@@ -13,15 +13,17 @@ function Login({ setToken, setUser, setCart }) {
     async function handleLogin(e) {
         e.preventDefault();
         const data = await login(username, password);
-        console.log(data.token);
+        // console.log(data.token);
         if(data) {
-            localStorage.setItem('token', data.token);
             setToken(data.token);
             const user = await fetchAllUsers(username);
+            // console.log(user);
             setUser(user);
-            const userCart = await fetchUserCart(user.id);
-            console.log(userCart);
             // console.log(user.id);
+            const id = user.id;
+            // console.log(id);
+            const userCart = await fetchUserCart(id);
+            //console.log(userCart);
             setCart(userCart);
             navigate(`/account/${user.id}`);
         }

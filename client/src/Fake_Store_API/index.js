@@ -93,6 +93,7 @@ export async function fetchUserCart(id) {
     try {
         const response = await fetch(`https://fakestoreapi.com/carts/${id}`);
         const result = await response.json();
+        console.log(result);
         console.log(result.products);
         return result.products;
     } catch(err) {

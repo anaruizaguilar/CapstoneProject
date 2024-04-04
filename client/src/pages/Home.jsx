@@ -2,7 +2,9 @@ import { fetchProducts } from "../Fake_Store_API";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function Home({products}) {
+function Home({products, cart, setCart }) {
+
+    console.log(cart);
 
     // const [products, setProducts] = useState([]);
 
@@ -18,6 +20,19 @@ function Home({products}) {
     //     getProducts();
     // }, [])
 
+    const handleAddToCart = () => {
+        const productId = product.id;
+        const existingCartItemIndex = cart.findIndex((item) => item.productId === productId);
+        if(existingCartItemIndex !== -1) {
+            const updatedCart = {...cart};
+            updatedCart[existingCartItemIndex].quantity += 1;
+            setCart(updatedCart);
+        } else {
+            const newItem = {productId, quantity: 1};
+            setCart((prevCart) => [...prevCart, newItem]);
+        }
+    }
+
     return(
         <div className="display-products">
             {
@@ -28,7 +43,7 @@ function Home({products}) {
                             <img src={product.image} className="home-pics"/>
                             <p>{product.category}</p>
                             <p>{product.price}</p>
-                            <button className="add-to-cart-homepage">Add To Cart</button>
+                            <button className="add-to-cart-homepage" onClick={handleAddToCart}>Add To Cart</button>
                         </div>
                     )
                 })

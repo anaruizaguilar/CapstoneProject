@@ -4,16 +4,17 @@ import { Home, SingleProduct, Register, Login, fetchProducts, Cart } from './Fak
 import './App.css'
 import Navbar from './components/Navbar';
 import Account from './pages/Account';
+import CheckoutPage from './components/CheckoutPage';
 
 
 
 
 function App() {
   
-const [token, setToken] = useState(localStorage.getItem('token'));
+const [token, setToken] = useState(localStorage.getItem('token' || null));
 const [products, setProducts] = useState([]);
-const [cart, setCart] = useState([]);
-const [user, setUser] = useState(null);
+const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart' || [] )));
+const [user, setUser] = useState(JSON.parse(localStorage.getItem('user' || null)));                                              
 
 useEffect(() => {
   const getAllProducts = async () => {
@@ -23,17 +24,33 @@ useEffect(() => {
   getAllProducts();
 }, [])
 
+useEffect(() => {
+  if(token) {
+    localStorage.setItem("token", token);
+    const userObj = JSON.stringify(user);
+    localStorage.setItem("user", userObj);
+    const cartArr = JSON.stringify(cart);
+    localStorage.setItem("cart", cartArr);
+    console.log(token, userObj, cartArr);
+  } else {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("cart");
+  }
+}, [token]);
+
   return (
   <>
-    <Navbar />
+    <Navbar token={token}/>
     <div>
       <Routes>
-        <Route path='/' element={<Home products={products}/>}></Route>
-        <Route path='/products/:id' element={<SingleProduct />}></Route>
+        <Route path='/' element={<Home products={products} cart={cart} setCart={setCart}/>}></Route>
+        <Route path='/products/:id' element={<SingleProduct cart={cart} setCart={setCart}/>}></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/login' element={<Login token={token} setToken={setToken} setUser={setUser} setCart={setCart}/>}></Route>
+        <Route path='/login' element={<Login setToken={setToken} setUser={setUser} products={products} setCart={setCart}/>}></Route>
         <Route path='/account/:id' element={<Account token={token} user={user} cart={cart}/>}></Route>
         <Route path='/cart' element={<Cart cart={cart} products={products} setCart={setCart} user={user}/>}></Route>
+        <Route path='/checkoutpage' element={<CheckoutPage />}></Route>
       </Routes>
     </div>
   </>
