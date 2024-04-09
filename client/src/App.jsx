@@ -37,7 +37,7 @@ useEffect(() => {
     localStorage.removeItem("user");
     localStorage.removeItem("cart");
   }
-}, [token]);
+}, [token, cart, user]);
 
   return (
   <>

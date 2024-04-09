@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ token }) {
+function Navbar({ token}) {
+
+
     return(
         <div className="navbar">
             <ul>

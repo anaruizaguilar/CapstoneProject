@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleProduct } from "../Fake_Store_API";
+import { addCartItem } from "../Fake_Store_API";
 
 
 function SingleProduct({ cart, setCart }) {
@@ -23,16 +24,8 @@ function SingleProduct({ cart, setCart }) {
     }, [id])
 
     const handleAddToCart = () => {
-        const productId = product.id;
-        const existingCartItemIndex = cart.findIndex((item) => item.productId === productId);
-        if(existingCartItemIndex !== -1) {
-            const updatedCart = {...cart};
-            updatedCart[existingCartItemIndex].quantity += 1;
-            setCart(updatedCart);
-        } else {
-            const newItem = {productId, quantity: 1};
-            setCart((prevCart) => [...prevCart, newItem]);
-        }
+      const productId = product.id;
+      setCart((prevCart) => addCartItem(prevCart, productId));
     }
 
     return(
