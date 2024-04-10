@@ -1,7 +1,7 @@
 import { addCartItem } from "../Fake_Store_API";
 
 function CartItemCard({ cartItem, quantity, onIncrement, onDecrement, onEdit }) {
-    console.log("cart item", cartItem);
+    // console.log("cart item", cartItem);
 
     const handleIncrement =() => {
         onIncrement(cartItem.id);

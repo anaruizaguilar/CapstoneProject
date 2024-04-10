@@ -1,8 +1,11 @@
 import { useState } from "react";
-import Cart from "./Cart";
+import Cart from "../components/Cart";
+import { useNavigate } from 'react-router-dom'
 
 function CheckoutPage() {
     
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
@@ -29,7 +32,6 @@ function CheckoutPage() {
     return(
         <>
             <h2>Checkout</h2>
-            {error && <p>{error}</p>}
             <form className="checkout-form">
                 <label>
                     Firstname: {""} <input value={formData.firstname} onChange={handleChange}/>
@@ -53,6 +55,7 @@ function CheckoutPage() {
                     Expiration Date: {""} <input value={formData.expirationDate} onChange={handleChange}/>
                 </label>
                 <button type="checkout-submit-button" onClick={handleSubmit}>Submit</button>
+                <button className="checkout-return-button" onClick={() => navigate('/')}>Continue Shopping</button>
             </form>
         </>
     );

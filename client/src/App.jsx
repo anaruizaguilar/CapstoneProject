@@ -4,9 +4,8 @@ import { Home, SingleProduct, Register, Login, fetchProducts, Cart } from './Fak
 import './App.css'
 import Navbar from './components/Navbar';
 import Account from './pages/Account';
-import CheckoutPage from './components/CheckoutPage';
-
-
+import CheckoutPage from './pages/CheckoutPage';
+import Categories from './components/Categories';
 
 
 function App() {
@@ -24,6 +23,7 @@ useEffect(() => {
   getAllProducts();
 }, [])
 
+
 useEffect(() => {
   if(token) {
     localStorage.setItem("token", token);
@@ -31,7 +31,7 @@ useEffect(() => {
     localStorage.setItem("user", userObj);
     const cartArr = JSON.stringify(cart);
     localStorage.setItem("cart", cartArr);
-    console.log(token, userObj, cartArr);
+    // console.log(token, userObj, cartArr);
   } else {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -41,16 +41,17 @@ useEffect(() => {
 
   return (
   <>
-    <Navbar token={token}/>
+    <Navbar token={token} />
     <div>
       <Routes>
         <Route path='/' element={<Home products={products} cart={cart} setCart={setCart}/>}></Route>
         <Route path='/products/:id' element={<SingleProduct cart={cart} setCart={setCart}/>}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login setToken={setToken} setUser={setUser} products={products} setCart={setCart}/>}></Route>
-        <Route path='/account/:id' element={<Account token={token} user={user} cart={cart}/>}></Route>
+        <Route path='/account/:id' element={<Account token={token} setToken={setToken} user={user} cart={cart}/>}></Route>
         <Route path='/cart' element={<Cart cart={cart} products={products} setCart={setCart} user={user}/>}></Route>
-        <Route path='/checkoutpage' element={<CheckoutPage />}></Route>
+        <Route path='/checkout' element={<CheckoutPage />}></Route>
+        <Route path='/categories/:categoryItem/*' element={<Categories products={products} setCart={setCart} cart={cart}/>}></Route>
       </Routes>
     </div>
   </>
